@@ -50,3 +50,38 @@ go run ./cmd/discord-bot
 | `LANOPS_JUKEBOX_API_URL`          | Base URL for the LANOPS jukebox API.                 |
 
 ## Docker
+
+```docker build -f resources/docker/Dockerfile .```
+
+```
+docker run -d \
+  --name party-discord-bot \
+  --restart unless-stopped \
+  -e DISCORD_TOKEN= \
+  -e DISCORD_SERVER_ID= \
+  -e DISCORD_ADMIN_ROLE_ID= \
+  -e DISCORD_COMMAND_PREFIX=! \
+  -e LANOPS_STREAM_PROXY_API_ADDRESS=http://localhost:8080 \
+  -e LANOPS_JUKEBOX_API_USERNAME= \
+  -e LANOPS_JUKEBOX_API_PASSWORD= \
+  -e LANOPS_JUKEBOX_API_URL=http://localhost:9999 \
+  -p 8888:8888 \
+  -v /mnt/servdata/lanops/jukebox/db:/db \
+  th0rn0/lanops-party-discord-bot:latest
+```
+
+```
+  party-discord-bot:
+    image: th0rn0/lanops-party-discord-bot:latest
+    container_name: party-discord-bot
+    restart: unless-stopped
+    environment:
+      DISCORD_TOKEN: 
+      DISCORD_SERVER_ID: 
+      DISCORD_ADMIN_ROLE_ID: 
+      DISCORD_COMMAND_PREFIX: "!"
+      LANOPS_STREAM_PROXY_API_ADDRESS: "http://localhost:8080"
+      LANOPS_JUKEBOX_API_USERNAME: 
+      LANOPS_JUKEBOX_API_PASSWORD: 
+      LANOPS_JUKEBOX_API_URL: "http://localhost:9999"
+```
