@@ -36,7 +36,7 @@ jobs:
           file: resources/docker/Dockerfile
           push: true
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/lanops-stream-proxy:latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/lanops-party-discord-bot:latest
       - 
         name: Discord Webhook Action - Build Success
         uses: tsickert/discord-webhook@v6.0.0
