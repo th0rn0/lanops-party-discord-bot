@@ -16,4 +16,4 @@ RUN go build -ldflags='-s -w -extldflags "-static"' -o bin/discord-bot ./cmd/dis
 
 EXPOSE 8080
 
-CMD [ "/discord-bot" ]
+CMD [ "bin/discord-bot" ]
