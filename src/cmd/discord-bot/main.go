@@ -16,10 +16,9 @@ var (
 	logger zerolog.Logger
 	cfg    config.Config
 	msgCh  = make(chan channels.MsgCh, 20)
-	// botClient *common.BotClient
 )
 
-func init() {
+func main() {
 	logger = zerolog.New(
 		zerolog.ConsoleWriter{Out: os.Stderr, TimeFormat: time.RFC3339},
 	).Level(zerolog.TraceLevel).With().Timestamp().Caller().Logger()
@@ -27,12 +26,9 @@ func init() {
 
 	logger.Info().Msg("Loading Config")
 	cfg = config.Load()
-}
 
-func main() {
 	logger.Info().Msg("Starting Party Discord Bot")
 
-	// streamsClient, err
 	// Message Channel
 	go func() {
 		for msg := range msgCh {
@@ -45,7 +41,7 @@ func main() {
 	}()
 
 	logger.Info().Msg("Starting Discord Bot")
-	discordClient, err := discordgo.New("Bot " + cfg.DiscordToken)
+	discordClient, err := discordgo.New("Bot " + cfg.Discord.Token)
 	if err != nil {
 		logger.Fatal().Err(err).Msg("Failed to create bot")
 	}
@@ -58,4 +54,7 @@ func main() {
 	if err := botClient.Run(); err != nil {
 		logger.Fatal().Err(err).Msg("Failed to start bot")
 	}
+	// TODO
+	// logs  for message events
+	// fix get current track
 }

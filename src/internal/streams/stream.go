@@ -10,14 +10,14 @@ import (
 )
 
 var (
-	client      http.Client
 	ErrNotFound = errors.New("Stream not found")
 )
 
 func New(cfg config.Config) Client {
 	c := Client{
-		url: cfg.LanopsStreamProxyApiAddress,
-		cfg: cfg,
+		url:  cfg.Lanops.StreamProxyApiAddress,
+		cfg:  cfg,
+		http: http.Client{},
 	}
 	return c
 }
@@ -27,8 +27,7 @@ func (c Client) GetStreams() (streams []stream, err error) {
 	if err != nil {
 		return streams, err
 	}
-	// req.SetBasicAuth(username, password)
-	resp, err := client.Do(req)
+	resp, err := c.http.Do(req)
 	if err != nil {
 		return streams, err
 	}
@@ -51,11 +50,10 @@ func (c Client) EnableStreamByName(name string, enabled bool) (stream stream, er
 	jsonData, _ = json.Marshal(params)
 	req, err := http.NewRequest("POST", c.url+"/streams/"+name+"/enable", bytes.NewReader(jsonData))
 	req.Header.Set("Content-Type", "application/json")
-
 	if err != nil {
 		return stream, err
 	}
-	resp, err := client.Do(req)
+	resp, err := c.http.Do(req)
 	if err != nil {
 		return stream, err
 	}
@@ -79,7 +77,7 @@ func (c Client) GetStreamByName(name string) (stream stream, err error) {
 	if err != nil {
 		return stream, err
 	}
-	resp, err := client.Do(req)
+	resp, err := c.http.Do(req)
 	if err != nil {
 		return stream, err
 	}

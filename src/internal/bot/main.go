@@ -23,9 +23,9 @@ func New(cfg config.Config, discordClient *discordgo.Session, msgCh chan<- chann
 	client.dg.AddHandler(func(s *discordgo.Session, m *discordgo.MessageCreate) {
 		handlers.OnMessage(s, m, cfg, msgCh)
 	})
-	// dg.AddHandler(func(s *discordgo.Session, m *discordgo.MessageCreate) {
-	// 	handlers.Ready(s, m, msgCh)
-	// })
+	client.dg.AddHandler(func(s *discordgo.Session, m *discordgo.MessageCreate) {
+		handlers.OnReady(s, m, cfg, msgCh)
+	})
 
 	// Set the Intents
 	client.dg.Identify.Intents = discordgo.IntentsGuilds | discordgo.IntentsGuildMessages | discordgo.IntentsGuildVoiceStates

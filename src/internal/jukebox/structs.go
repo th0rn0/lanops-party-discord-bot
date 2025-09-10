@@ -1,7 +1,12 @@
 package jukebox
 
-type API struct {
-	URL string
+import "net/http"
+
+type Client struct {
+	username string
+	password string
+	url      string
+	http     http.Client
 }
 
 type GetCurrentTrackOutput struct {

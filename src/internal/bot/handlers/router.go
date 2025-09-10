@@ -9,17 +9,7 @@ import (
 	"github.com/bwmarrin/discordgo"
 )
 
-// func (b *Bot) messageHandler(s *discordgo.Session, m *discordgo.MessageCreate) {
 func OnMessage(s *discordgo.Session, m *discordgo.MessageCreate, cfg config.Config, msgCh chan<- channels.MsgCh) {
-	// var returnString = "Default Message. If you are seeing this, Corey, Trevor... You fucked up!"
-	// var sendMessage = true
-	// var sendMessage = false
-
-	// Ignore all messages created by the bot itself
-	// if m.Author.ID == s.State.User.ID {
-	// 	return
-	// }
-
 	if m.Author.Bot {
 		return
 	}
@@ -27,13 +17,10 @@ func OnMessage(s *discordgo.Session, m *discordgo.MessageCreate, cfg config.Conf
 	if !strings.HasPrefix(m.Content, "!") {
 		return
 	}
-	// s.ChannelMessageSend(m.ChannelID, returnString)
 
 	content := strings.TrimPrefix(m.Content, "!")
 	parts := strings.Fields(content)
 	if len(parts) == 0 {
-		// s.ChannelMessageSend(m.ChannelID, returnString)
-
 		return
 	}
 
@@ -41,9 +28,6 @@ func OnMessage(s *discordgo.Session, m *discordgo.MessageCreate, cfg config.Conf
 		key := strings.Join(parts[:i], " ")
 		if handler, ok := Registry[key]; ok {
 			handler(s, m, parts[:i], parts[i:], cfg, msgCh)
-
-			// s.ChannelMessageSend(m.ChannelID, returnString)
-
 			return
 		}
 	}
@@ -65,14 +49,9 @@ func OnMessage(s *discordgo.Session, m *discordgo.MessageCreate, cfg config.Conf
 	// 		returnString = jukeboxAPI.Control(jukeboxCommand[1])
 	// 		sendMessage = true
 	// 	}
-
-	// Return the Message
-	// if sendMessage {
-	// 	s.ChannelMessageSend(m.ChannelID, returnString)
-	// }
 }
 
-func OnReady(s *discordgo.Session, event *discordgo.Ready, msgCh chan<- channels.MsgCh) {
+func OnReady(s *discordgo.Session, m *discordgo.MessageCreate, cfg config.Config, msgCh chan<- channels.MsgCh) {
 	// Set the playing status.
 	s.UpdateGameStatus(0, "Lan Partying!")
 }

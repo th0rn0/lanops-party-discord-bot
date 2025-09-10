@@ -1,9 +1,20 @@
 package config
 
 type Config struct {
-	DiscordCommandPrefix        string
-	DiscordToken                string
-	DiscordGuildId              string
-	DiscordAdminRoleId          string
-	LanopsStreamProxyApiAddress string
+	Discord Discord
+	Lanops  Lanops
+}
+
+type Discord struct {
+	CommandPrefix string
+	Token         string
+	GuildId       string
+	AdminRoleId   string
+}
+
+type Lanops struct {
+	StreamProxyApiAddress string
+	JukeboxApiUsername    string
+	JukeboxApiPassword    string
+	JukeboxApiUrl         string
 }

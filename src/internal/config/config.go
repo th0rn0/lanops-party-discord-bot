@@ -9,15 +9,11 @@ import (
 
 func Load() Config {
 	godotenv.Load()
+
 	// Discord
 	discordToken := os.Getenv("DISCORD_TOKEN")
 	if discordToken == "" {
 		log.Fatal("❌ DISCORD_TOKEN not set in environment")
-	}
-
-	discordGuildId := os.Getenv("DISCORD_SERVER_ID")
-	if discordGuildId == "" {
-		log.Fatal("❌ DISCORD_SERVER_ID not set in environment")
 	}
 
 	discordAdminRoleId := os.Getenv("DISCORD_ADMIN_ROLE_ID")
@@ -36,11 +32,32 @@ func Load() Config {
 		log.Fatal("❌ LANOPS_STREAM_PROXY_API_ADDRESS not set in environment")
 	}
 
+	// Jukebox
+	lanopsJukeboxApiUsername := os.Getenv("LANOPS_JUKEBOX_API_USERNAME")
+	if lanopsJukeboxApiUsername == "" {
+		log.Fatal("❌ LANOPS_JUKEBOX_API_USERNAME not set in environment")
+	}
+	lanopsJukeboxApiPassword := os.Getenv("LANOPS_JUKEBOX_API_PASSWORD")
+	if lanopsJukeboxApiPassword == "" {
+		log.Fatal("❌ LANOPS_JUKEBOX_API_PASSWORD not set in environment")
+	}
+	lanopsJukeboxApiUrl := os.Getenv("LANOPS_JUKEBOX_API_URL")
+	if lanopsJukeboxApiUrl == "" {
+		log.Fatal("❌ LANOPS_JUKEBOX_API_URL not set in environment")
+	}
+	discord := Discord{
+		CommandPrefix: discordCommandPrefix,
+		Token:         discordToken,
+		AdminRoleId:   discordAdminRoleId,
+	}
+	lanops := Lanops{
+		StreamProxyApiAddress: lanopsStreamProxyApiAddress,
+		JukeboxApiUsername:    lanopsJukeboxApiUsername,
+		JukeboxApiPassword:    lanopsJukeboxApiPassword,
+		JukeboxApiUrl:         lanopsJukeboxApiUrl,
+	}
 	return Config{
-		DiscordCommandPrefix:        discordCommandPrefix,
-		DiscordToken:                discordToken,
-		DiscordGuildId:              discordGuildId,
-		DiscordAdminRoleId:          discordAdminRoleId,
-		LanopsStreamProxyApiAddress: lanopsStreamProxyApiAddress,
+		Discord: discord,
+		Lanops:  lanops,
 	}
 }
