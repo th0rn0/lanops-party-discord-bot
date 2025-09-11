@@ -14,11 +14,11 @@ func OnMessage(s *discordgo.Session, m *discordgo.MessageCreate, cfg config.Conf
 		return
 	}
 
-	if !strings.HasPrefix(m.Content, "!") {
+	if !strings.HasPrefix(m.Content, cfg.Discord.CommandPrefix) {
 		return
 	}
 
-	content := strings.TrimPrefix(m.Content, "!")
+	content := strings.TrimPrefix(m.Content, cfg.Discord.CommandPrefix)
 	parts := strings.Fields(content)
 	if len(parts) == 0 {
 		return
@@ -31,24 +31,6 @@ func OnMessage(s *discordgo.Session, m *discordgo.MessageCreate, cfg config.Conf
 			return
 		}
 	}
-
-	// if strings.HasPrefix(m.Content, commandPrefix+"jukebox") {
-	// 	logger.Info().Msg("Message Create Event - Jukebox - Triggered")
-	// 	returnString = "we are testing pal jukebox"
-	// 	sendMessage = true
-	// }
-
-	// if m.Content == commandPrefix+"jb current" {
-	// 	logger.Info().Msg("Message Create Event - Jukebox Currently playing - Triggered")
-	// 	returnString = jukeboxAPI.GetCurrentTrack()
-	// 	sendMessage = true
-	// } else if slices.Contains(m.Member.Roles, discordJukeBoxControlRoleID) {
-	// 	if strings.HasPrefix(m.Content, commandPrefix+"jb") {
-	// 		logger.Info().Msg("Message Create Event - Jukebox Control - Triggered")
-	// 		jukeboxCommand := strings.Split(m.Content, " ")
-	// 		returnString = jukeboxAPI.Control(jukeboxCommand[1])
-	// 		sendMessage = true
-	// 	}
 }
 
 func OnReady(s *discordgo.Session, m *discordgo.MessageCreate, cfg config.Config, msgCh chan<- channels.MsgCh) {

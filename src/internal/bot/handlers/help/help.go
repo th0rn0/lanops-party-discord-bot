@@ -9,20 +9,19 @@ import (
 	"github.com/bwmarrin/discordgo"
 )
 
-var commands = map[string]string{
-	"!help":                         "Show available commands",
-	"!stream enable <stream name>":  "Enable live stream",
-	"!stream disable <stream name>": "Disable live stream",
-	"!stream list":                  "List available scenes",
-	"!jukebox play":                 "Play a track",
-	"!jukebox pause":                "Pause the current track",
-	"!jukebox skip":                 "Skip the current track",
-	"!jukebox queue":                "Show the current queue",
-	"!jukebox stop":                 "Stop playback and clear the queue",
-}
-
 func Handler(s *discordgo.Session, m *discordgo.MessageCreate, commandParts []string, args []string, cfg config.Config, msgCh chan<- channels.MsgCh) {
 	if slices.Contains(m.Member.Roles, cfg.Discord.AdminRoleId) {
+		var commands = map[string]string{
+			cfg.Discord.CommandPrefix + "help":                         "Show available commands",
+			cfg.Discord.CommandPrefix + "stream enable <stream name>":  "Enable live stream",
+			cfg.Discord.CommandPrefix + "stream disable <stream name>": "Disable live stream",
+			cfg.Discord.CommandPrefix + "stream list":                  "List available scenes",
+			cfg.Discord.CommandPrefix + "jukebox play":                 "Play a track",
+			cfg.Discord.CommandPrefix + "jukebox pause":                "Pause the current track",
+			cfg.Discord.CommandPrefix + "jukebox skip":                 "Skip the current track",
+			cfg.Discord.CommandPrefix + "jukebox queue":                "Show the current queue",
+			cfg.Discord.CommandPrefix + "jukebox stop":                 "Stop playback and clear the queue",
+		}
 		helpMsg := "**Available Commands:**\n"
 		for cmd, desc := range commands {
 			helpMsg += fmt.Sprintf("`%s` - %s\n", cmd, desc)
