@@ -38,16 +38,18 @@ go run ./cmd/discord-bot
 
 ## Env
 
-| Variable                          | Description                                          |
-|-----------------------------------|------------------------------------------------------|
-| `DISCORD_TOKEN`                   | Token for authenticating the Discord bot.            |
-| `DISCORD_SERVER_ID`               | ID of the Discord server (guild) to connect to.      |
-| `DISCORD_ADMIN_ROLE_ID`           | Role ID that grants admin permissions in Discord.    |
-| `DISCORD_COMMAND_PREFIX`          | Prefix used for bot commands in Discord (e.g., `!`). |
-| `LANOPS_STREAM_PROXY_API_ADDRESS` | Address of the LANOPS Stream Proxy API.              |
-| `LANOPS_JUKEBOX_API_USERNAME`     | Username for authenticating with the jukebox API.    |
-| `LANOPS_JUKEBOX_API_PASSWORD`     | Password for authenticating with the jukebox API.    |
-| `LANOPS_JUKEBOX_API_URL`          | Base URL for the LANOPS jukebox API.                 |
+| Variable                           | Description                                            |
+|------------------------------------|--------------------------------------------------------|
+| `DISCORD_TOKEN`                    | Token for authenticating the Discord bot.              |
+| `DISCORD_SERVER_ID`                | ID of the Discord server (guild) to connect to.        |
+| `DISCORD_ADMIN_ROLE_ID`            | Role ID that grants admin permissions in Discord.      |
+| `DISCORD_COMMAND_PREFIX`           | Prefix used for bot commands in Discord (e.g., `!`).   |
+| `LANOPS_STREAM_PROXY_API_USERNAME` | Username for authenticating with the Stream Proxy API. |
+| `LANOPS_STREAM_PROXY_API_PASSWORD` | Password for authenticating with the Stream Proxy API. |
+| `LANOPS_STREAM_PROXY_API_ADDRESS`  | Address of the LANOPS Stream Proxy API.                |
+| `LANOPS_JUKEBOX_API_USERNAME`      | Username for authenticating with the jukebox API.      |
+| `LANOPS_JUKEBOX_API_PASSWORD`      | Password for authenticating with the jukebox API.      |
+| `LANOPS_JUKEBOX_API_URL`           | Base URL for the LANOPS jukebox API.                   |
 
 ## Docker
 
@@ -61,6 +63,8 @@ docker run -d \
   -e DISCORD_SERVER_ID= \
   -e DISCORD_ADMIN_ROLE_ID= \
   -e DISCORD_COMMAND_PREFIX=! \
+  -e LANOPS_STREAM_PROXY_API_USERNAME= \
+  -e LANOPS_STREAM_PROXY_API_PASSWORD= \
   -e LANOPS_STREAM_PROXY_API_ADDRESS=http://localhost:8080 \
   -e LANOPS_JUKEBOX_API_USERNAME= \
   -e LANOPS_JUKEBOX_API_PASSWORD= \
@@ -80,6 +84,8 @@ docker run -d \
       DISCORD_SERVER_ID: 
       DISCORD_ADMIN_ROLE_ID: 
       DISCORD_COMMAND_PREFIX: "!"
+      LANOPS_STREAM_PROXY_API_USERNAME: 
+      LANOPS_STREAM_PROXY_API_PASSWORD:
       LANOPS_STREAM_PROXY_API_ADDRESS: "http://localhost:8080"
       LANOPS_JUKEBOX_API_USERNAME: 
       LANOPS_JUKEBOX_API_PASSWORD: 
