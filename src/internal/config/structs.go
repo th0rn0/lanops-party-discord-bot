@@ -13,8 +13,10 @@ type Discord struct {
 }
 
 type Lanops struct {
-	StreamProxyApiAddress string
-	JukeboxApiUsername    string
-	JukeboxApiPassword    string
-	JukeboxApiUrl         string
+	StreamProxyApiUsername string
+	StreamProxyApiPassword string
+	StreamProxyApiAddress  string
+	JukeboxApiUsername     string
+	JukeboxApiPassword     string
+	JukeboxApiUrl          string
 }

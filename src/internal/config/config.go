@@ -27,6 +27,14 @@ func Load() Config {
 	}
 
 	// Stream Proxy
+	lanopsStreamProxyApiUsername := os.Getenv("LANOPS_STREAM_PROXY_API_USERNAME")
+	if lanopsStreamProxyApiUsername == "" {
+		log.Fatal("❌ LANOPS_STREAM_PROXY_API_USERNAME not set in environment")
+	}
+	lanopsStreamProxyApiPassword := os.Getenv("LANOPS_STREAM_PROXY_API_PASSWORD")
+	if lanopsStreamProxyApiPassword == "" {
+		log.Fatal("❌ LANOPS_STREAM_PROXY_API_PASSWORD not set in environment")
+	}
 	lanopsStreamProxyApiAddress := os.Getenv("LANOPS_STREAM_PROXY_API_ADDRESS")
 	if lanopsStreamProxyApiAddress == "" {
 		log.Fatal("❌ LANOPS_STREAM_PROXY_API_ADDRESS not set in environment")
@@ -51,10 +59,12 @@ func Load() Config {
 		AdminRoleId:   discordAdminRoleId,
 	}
 	lanops := Lanops{
-		StreamProxyApiAddress: lanopsStreamProxyApiAddress,
-		JukeboxApiUsername:    lanopsJukeboxApiUsername,
-		JukeboxApiPassword:    lanopsJukeboxApiPassword,
-		JukeboxApiUrl:         lanopsJukeboxApiUrl,
+		StreamProxyApiUsername: lanopsStreamProxyApiUsername,
+		StreamProxyApiPassword: lanopsStreamProxyApiPassword,
+		StreamProxyApiAddress:  lanopsStreamProxyApiAddress,
+		JukeboxApiUsername:     lanopsJukeboxApiUsername,
+		JukeboxApiPassword:     lanopsJukeboxApiPassword,
+		JukeboxApiUrl:          lanopsJukeboxApiUrl,
 	}
 	return Config{
 		Discord: discord,
