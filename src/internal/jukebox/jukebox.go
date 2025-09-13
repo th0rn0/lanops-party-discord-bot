@@ -121,5 +121,5 @@ func (c Client) GetCurrentTrack() (returnString string, err error) {
 	if err != nil {
 		return returnString, err
 	}
-	return fmt.Sprintf("Currently Playing: %s - %s", getCurrentTrackOutput.Name, getCurrentTrackOutput.Artists[0].Name), nil
+	return fmt.Sprintf("Currently Playing: %s - %s", getCurrentTrackOutput.Name, getCurrentTrackOutput.Artist), nil
 }

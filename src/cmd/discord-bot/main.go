@@ -54,6 +54,4 @@ func main() {
 	if err := botClient.Run(); err != nil {
 		logger.Fatal().Err(err).Msg("Failed to start bot")
 	}
-	// TODO
-	// fix get current track
 }
