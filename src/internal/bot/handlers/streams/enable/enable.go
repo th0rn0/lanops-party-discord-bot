@@ -14,7 +14,7 @@ import (
 func Handler(s *discordgo.Session, m *discordgo.MessageCreate, commandParts []string, args []string, cfg config.Config, msgCh chan<- channels.MsgCh) {
 	if slices.Contains(m.Member.Roles, cfg.Discord.AdminRoleId) {
 		var returnString string
-		msgCh <- channels.MsgCh{Err: nil, Message: "Message Event - Stream - Triggered", Level: "INFO"}
+		msgCh <- channels.MsgCh{Err: nil, Message: "Message Event - Stream Enabled - Triggered", Level: "INFO"}
 		streamClient := streams.New(cfg)
 		enable := true
 		returnString = fmt.Sprintf("Enabled Stream: %s", args[0])

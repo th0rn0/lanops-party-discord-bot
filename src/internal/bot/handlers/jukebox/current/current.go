@@ -10,7 +10,7 @@ import (
 
 func Handler(s *discordgo.Session, m *discordgo.MessageCreate, commandParts []string, args []string, cfg config.Config, msgCh chan<- channels.MsgCh) {
 	var returnString string
-	msgCh <- channels.MsgCh{Err: nil, Message: "Message Event - Jukebox - Triggered", Level: "INFO"}
+	msgCh <- channels.MsgCh{Err: nil, Message: "Message Event - Jukebox Current - Triggered", Level: "INFO"}
 	jukeboxClient := jukebox.New(cfg)
 	returnString, err := jukeboxClient.GetCurrentTrack()
 	if err != nil {

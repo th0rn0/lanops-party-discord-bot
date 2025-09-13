@@ -55,6 +55,5 @@ func main() {
 		logger.Fatal().Err(err).Msg("Failed to start bot")
 	}
 	// TODO
-	// logs  for message events
 	// fix get current track
 }

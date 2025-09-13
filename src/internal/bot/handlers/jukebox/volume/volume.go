@@ -13,7 +13,7 @@ import (
 func Handler(s *discordgo.Session, m *discordgo.MessageCreate, commandParts []string, args []string, cfg config.Config, msgCh chan<- channels.MsgCh) {
 	if slices.Contains(m.Member.Roles, cfg.Discord.AdminRoleId) {
 		var returnString string
-		msgCh <- channels.MsgCh{Err: nil, Message: "Message Event - Jukebox - Triggered", Level: "INFO"}
+		msgCh <- channels.MsgCh{Err: nil, Message: "Message Event - Jukebox Volume - Triggered", Level: "INFO"}
 		jukeboxClient := jukebox.New(cfg)
 		convertedInt, err := strconv.Atoi(args[0])
 		if err != nil {

@@ -14,8 +14,6 @@ func OnMessage(s *discordgo.Session, m *discordgo.MessageCreate, cfg config.Conf
 		return
 	}
 
-	msgCh <- channels.MsgCh{Err: nil, Message: "Message Event - Triggered", Level: "INFO"}
-
 	if !strings.HasPrefix(m.Content, cfg.Discord.CommandPrefix) {
 		return
 	}
