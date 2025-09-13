@@ -14,14 +14,15 @@ func Handler(s *discordgo.Session, m *discordgo.MessageCreate, commandParts []st
 	if slices.Contains(m.Member.Roles, cfg.Discord.AdminRoleId) {
 		helpMsg := "**Available Commands:**\n"
 		helpMsg += formatCommands(map[string]string{
-			cfg.Discord.CommandPrefix + "stream enable <stream name>":  "Enable live stream",
-			cfg.Discord.CommandPrefix + "stream disable <stream name>": "Disable live stream",
-			cfg.Discord.CommandPrefix + "stream list":                  "List available scenes",
-			cfg.Discord.CommandPrefix + "jukebox play":                 "Play a track",
-			cfg.Discord.CommandPrefix + "jukebox pause":                "Pause the current track",
-			cfg.Discord.CommandPrefix + "jukebox skip":                 "Skip the current track",
-			cfg.Discord.CommandPrefix + "jukebox queue":                "Show the current queue",
-			cfg.Discord.CommandPrefix + "jukebox stop":                 "Stop playback and clear the queue",
+			cfg.Discord.CommandPrefix + "stream enable <stream name>":           "Enable live stream",
+			cfg.Discord.CommandPrefix + "stream disable <stream name>":          "Disable live stream",
+			cfg.Discord.CommandPrefix + "stream list":                           "List available scenes",
+			cfg.Discord.CommandPrefix + "jukebox start":                         "Start the Jukebox",
+			cfg.Discord.CommandPrefix + "jukebox stop":                          "Stop playback and clear the queue",
+			cfg.Discord.CommandPrefix + "jukebox pause":                         "Pause the current track",
+			cfg.Discord.CommandPrefix + "jukebox skip":                          "Skip the current track",
+			cfg.Discord.CommandPrefix + "jukebox current":                       "Show the current track",
+			cfg.Discord.CommandPrefix + "jukebox volume <volume between 0-100>": "Set Jukebox Volume",
 		})
 		s.ChannelMessageSend(m.ChannelID, helpMsg)
 	}
