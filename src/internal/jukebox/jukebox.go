@@ -103,6 +103,28 @@ func (c Client) SetVolume(volume int) error {
 	return nil
 }
 
+func (c Client) GetVolume() (volume int, err error) {
+	var getVolumeOutput GetVolumeOutput
+	req, err := http.NewRequest("GET", c.url+"/player/volume", nil)
+	if err != nil {
+		return volume, err
+	}
+	req.SetBasicAuth(c.username, c.password)
+	resp, err := c.http.Do(req)
+	if err != nil {
+		return volume, err
+	}
+	if resp.StatusCode != 200 {
+		return volume, errors.New(fmt.Sprintf("Status code %d", resp.StatusCode))
+	}
+	body, err := io.ReadAll(resp.Body)
+	err = json.Unmarshal(body, &getVolumeOutput)
+	if err != nil {
+		return volume, err
+	}
+	return getVolumeOutput.Volume, nil
+}
+
 func (c Client) GetCurrentTrack() (returnString string, err error) {
 	var getCurrentTrackOutput GetCurrentTrackOutput
 	req, err := http.NewRequest("GET", c.url+"/tracks/current", nil)

@@ -15,3 +15,7 @@ type GetCurrentTrackOutput struct {
 	Name   string `json:"name"`
 	Artist string `json:"artist"`
 }
+
+type GetVolumeOutput struct {
+	Volume int `json:"volume"`
+}

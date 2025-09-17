@@ -1,6 +1,7 @@
 package volume
 
 import (
+	"fmt"
 	"lanops/party-discord-bot/internal/channels"
 	"lanops/party-discord-bot/internal/config"
 	"lanops/party-discord-bot/internal/jukebox"
@@ -16,7 +17,13 @@ func Handler(s *discordgo.Session, m *discordgo.MessageCreate, commandParts []st
 		msgCh <- channels.MsgCh{Err: nil, Message: "Message Event - Jukebox Volume - Triggered", Level: "INFO"}
 		jukeboxClient := jukebox.New(cfg)
 		if len(args) == 0 {
-			returnString = "Current Volume: "
+			volume, err := jukeboxClient.GetVolume()
+			if err != nil {
+				msgCh <- channels.MsgCh{Err: err, Message: "Something went wrong", Level: "ERROR"}
+				returnString = "There was a error connecting to the API"
+			} else {
+				returnString = fmt.Sprintf("Current Volume: %d", volume)
+			}
 		} else {
 			convertedInt, err := strconv.Atoi(args[0])
 			if err != nil {
