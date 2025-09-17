@@ -82,7 +82,7 @@ func (c Client) Skip() error {
 	return nil
 }
 
-func (c Client) Volume(volume int) error {
+func (c Client) SetVolume(volume int) error {
 	var jsonData []byte
 	params := map[string]interface{}{
 		"volume": volume,
