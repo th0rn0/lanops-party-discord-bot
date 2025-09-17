@@ -143,5 +143,6 @@ func (c Client) GetCurrentTrack() (returnString string, err error) {
 	if err != nil {
 		return returnString, err
 	}
+	// TODO - just return the name and artist, not the entire string.
 	return fmt.Sprintf("Currently Playing: %s - %s", getCurrentTrackOutput.Name, getCurrentTrackOutput.Artist), nil
 }
