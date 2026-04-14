@@ -51,7 +51,7 @@ func TestGetStreams_Success(t *testing.T) {
 			t.Errorf("unexpected path: %s", r.URL.Path)
 		}
 		w.WriteHeader(200)
-		json.NewEncoder(w).Encode(streams)
+		_ = json.NewEncoder(w).Encode(streams)
 	}))
 	defer srv.Close()
 
@@ -67,7 +67,7 @@ func TestGetStreams_Success(t *testing.T) {
 func TestGetStreams_EmptyList(t *testing.T) {
 	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(200)
-		w.Write([]byte("[]"))
+		_, _ = w.Write([]byte("[]"))
 	}))
 	defer srv.Close()
 
@@ -109,7 +109,7 @@ func TestGetStreams_NewRequestError(t *testing.T) {
 func TestGetStreams_InvalidJSON(t *testing.T) {
 	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(200)
-		w.Write([]byte("not json"))
+		_, _ = w.Write([]byte("not json"))
 	}))
 	defer srv.Close()
 
@@ -126,7 +126,7 @@ func TestEnableStreamByName_Enable(t *testing.T) {
 			t.Errorf("unexpected request: %s %s", r.Method, r.URL.Path)
 		}
 		w.WriteHeader(200)
-		json.NewEncoder(w).Encode(stream{Name: "mystream", Enabled: true})
+		_ = json.NewEncoder(w).Encode(stream{Name: "mystream", Enabled: true})
 	}))
 	defer srv.Close()
 
@@ -142,7 +142,7 @@ func TestEnableStreamByName_Enable(t *testing.T) {
 func TestEnableStreamByName_Disable(t *testing.T) {
 	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(200)
-		json.NewEncoder(w).Encode(stream{Name: "mystream", Enabled: false})
+		_ = json.NewEncoder(w).Encode(stream{Name: "mystream", Enabled: false})
 	}))
 	defer srv.Close()
 
@@ -196,7 +196,7 @@ func TestEnableStreamByName_RequestFails(t *testing.T) {
 func TestEnableStreamByName_InvalidJSON(t *testing.T) {
 	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(200)
-		w.Write([]byte("not json"))
+		_, _ = w.Write([]byte("not json"))
 	}))
 	defer srv.Close()
 
@@ -214,7 +214,7 @@ func TestGetStreamByName_Success(t *testing.T) {
 			t.Errorf("unexpected path: %s", r.URL.Path)
 		}
 		w.WriteHeader(http.StatusFound)
-		json.NewEncoder(w).Encode(stream{Name: "mystream", Enabled: true})
+		_ = json.NewEncoder(w).Encode(stream{Name: "mystream", Enabled: true})
 	}))
 	defer srv.Close()
 
@@ -270,7 +270,7 @@ func TestGetStreamByName_NewRequestError(t *testing.T) {
 func TestGetStreamByName_InvalidJSON(t *testing.T) {
 	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusFound)
-		w.Write([]byte("not json"))
+		_, _ = w.Write([]byte("not json"))
 	}))
 	defer srv.Close()
 

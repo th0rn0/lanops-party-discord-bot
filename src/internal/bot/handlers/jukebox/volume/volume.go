@@ -27,7 +27,7 @@ func Handler(s *discordgo.Session, m *discordgo.MessageCreate, commandParts []st
 		} else {
 			convertedInt, err := strconv.Atoi(args[0])
 			if err != nil {
-				returnString = "I can't do that brian"
+				returnString = "I can't do that brian" //nolint:ineffassign
 			}
 			if err := jukeboxClient.SetVolume(convertedInt); err != nil {
 				msgCh <- channels.MsgCh{Err: err, Message: "Something went wrong", Level: "ERROR"}
@@ -36,6 +36,6 @@ func Handler(s *discordgo.Session, m *discordgo.MessageCreate, commandParts []st
 				returnString = "Changing Volume on Jukebox"
 			}
 		}
-		s.ChannelMessageSend(m.ChannelID, returnString)
+		_, _ = s.ChannelMessageSend(m.ChannelID, returnString)
 	}
 }

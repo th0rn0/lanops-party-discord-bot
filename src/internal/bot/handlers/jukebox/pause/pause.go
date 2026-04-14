@@ -20,7 +20,7 @@ func Handler(s *discordgo.Session, m *discordgo.MessageCreate, commandParts []st
 		} else {
 			returnString = "Pausing Jukebox"
 		}
-		s.ChannelMessageSend(m.ChannelID, returnString)
+		_, _ = s.ChannelMessageSend(m.ChannelID, returnString)
 	}
 
 }

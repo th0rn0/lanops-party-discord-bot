@@ -2,9 +2,7 @@ package bot_test
 
 import (
 	"errors"
-	"io"
 	"net/http"
-	"strings"
 	"testing"
 
 	"github.com/bwmarrin/discordgo"
@@ -20,15 +18,6 @@ func (e *errorTransport) RoundTrip(*http.Request) (*http.Response, error) {
 	return nil, errors.New("mock transport error")
 }
 
-type mockDiscordTransport struct{}
-
-func (t *mockDiscordTransport) RoundTrip(req *http.Request) (*http.Response, error) {
-	return &http.Response{
-		StatusCode: 200,
-		Body:       io.NopCloser(strings.NewReader(`{"url":"wss://gateway.discord.gg"}`)),
-		Header:     make(http.Header),
-	}, nil
-}
 
 func newTestCfg() config.Config {
 	return config.Config{

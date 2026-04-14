@@ -8,7 +8,7 @@ import (
 )
 
 func Load() Config {
-	godotenv.Load()
+	_ = godotenv.Load()
 
 	// Discord
 	discordToken := os.Getenv("DISCORD_TOKEN")

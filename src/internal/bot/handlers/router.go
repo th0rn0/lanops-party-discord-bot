@@ -35,5 +35,5 @@ func OnMessage(s *discordgo.Session, m *discordgo.MessageCreate, cfg config.Conf
 
 func OnReady(s *discordgo.Session, m *discordgo.MessageCreate, cfg config.Config, msgCh chan<- channels.MsgCh) {
 	// Set the playing status.
-	s.UpdateGameStatus(0, "Lan Partying!")
+	_ = s.UpdateGameStatus(0, "Lan Partying!")
 }

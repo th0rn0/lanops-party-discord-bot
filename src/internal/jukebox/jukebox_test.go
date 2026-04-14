@@ -238,7 +238,7 @@ func TestGetVolume_Success(t *testing.T) {
 			t.Errorf("unexpected request: %s %s", r.Method, r.URL.Path)
 		}
 		w.WriteHeader(200)
-		json.NewEncoder(w).Encode(GetVolumeOutput{Volume: 75})
+		_ = json.NewEncoder(w).Encode(GetVolumeOutput{Volume: 75})
 	}))
 	defer srv.Close()
 
@@ -274,7 +274,7 @@ func TestGetVolume_NewRequestError(t *testing.T) {
 func TestGetVolume_InvalidJSON(t *testing.T) {
 	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(200)
-		w.Write([]byte("not json"))
+		_, _ = w.Write([]byte("not json"))
 	}))
 	defer srv.Close()
 
@@ -291,7 +291,7 @@ func TestGetCurrentTrack_Success(t *testing.T) {
 			t.Errorf("unexpected path: %s", r.URL.Path)
 		}
 		w.WriteHeader(200)
-		json.NewEncoder(w).Encode(GetCurrentTrackOutput{Name: "Sandstorm", Artist: "Darude"})
+		_ = json.NewEncoder(w).Encode(GetCurrentTrackOutput{Name: "Sandstorm", Artist: "Darude"})
 	}))
 	defer srv.Close()
 
@@ -327,7 +327,7 @@ func TestGetCurrentTrack_NewRequestError(t *testing.T) {
 func TestGetCurrentTrack_InvalidJSON(t *testing.T) {
 	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(200)
-		w.Write([]byte("not json"))
+		_, _ = w.Write([]byte("not json"))
 	}))
 	defer srv.Close()
 

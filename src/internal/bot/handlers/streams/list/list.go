@@ -28,6 +28,6 @@ func Handler(s *discordgo.Session, m *discordgo.MessageCreate, commandParts []st
 				returnString += "NO STREAMS AVAILABLE"
 			}
 		}
-		s.ChannelMessageSend(m.ChannelID, returnString)
+		_, _ = s.ChannelMessageSend(m.ChannelID, returnString)
 	}
 }

@@ -3,7 +3,6 @@ package jukebox
 import (
 	"bytes"
 	"encoding/json"
-	"errors"
 	"fmt"
 	"io"
 	"lanops/party-discord-bot/internal/config"
@@ -29,7 +28,7 @@ func (c Client) Start() error {
 		return err
 	}
 	if resp.StatusCode != 200 {
-		return errors.New(fmt.Sprintf("Status code %d", resp.StatusCode))
+		return fmt.Errorf("status code %d", resp.StatusCode)
 	}
 	return nil
 }
@@ -45,7 +44,7 @@ func (c Client) Stop() error {
 		return err
 	}
 	if resp.StatusCode != 200 {
-		return errors.New(fmt.Sprintf("Status code %d", resp.StatusCode))
+		return fmt.Errorf("status code %d", resp.StatusCode)
 	}
 	return nil
 }
@@ -61,7 +60,7 @@ func (c Client) Pause() error {
 		return err
 	}
 	if resp.StatusCode != 200 {
-		return errors.New(fmt.Sprintf("Status code %d", resp.StatusCode))
+		return fmt.Errorf("status code %d", resp.StatusCode)
 	}
 	return nil
 }
@@ -77,7 +76,7 @@ func (c Client) Skip() error {
 		return err
 	}
 	if resp.StatusCode != 200 {
-		return errors.New(fmt.Sprintf("Status code %d", resp.StatusCode))
+		return fmt.Errorf("status code %d", resp.StatusCode)
 	}
 	return nil
 }
@@ -98,7 +97,7 @@ func (c Client) SetVolume(volume int) error {
 		return err
 	}
 	if resp.StatusCode != 200 {
-		return errors.New(fmt.Sprintf("Status code %d", resp.StatusCode))
+		return fmt.Errorf("status code %d", resp.StatusCode)
 	}
 	return nil
 }
@@ -115,9 +114,9 @@ func (c Client) GetVolume() (volume int, err error) {
 		return volume, err
 	}
 	if resp.StatusCode != 200 {
-		return volume, errors.New(fmt.Sprintf("Status code %d", resp.StatusCode))
+		return volume, fmt.Errorf("status code %d", resp.StatusCode)
 	}
-	body, err := io.ReadAll(resp.Body)
+	body, _ := io.ReadAll(resp.Body)
 	err = json.Unmarshal(body, &getVolumeOutput)
 	if err != nil {
 		return volume, err
@@ -136,9 +135,9 @@ func (c Client) GetCurrentTrack() (returnString string, err error) {
 		return returnString, err
 	}
 	if resp.StatusCode != 200 {
-		return returnString, errors.New(fmt.Sprintf("Status code %d", resp.StatusCode))
+		return returnString, fmt.Errorf("status code %d", resp.StatusCode)
 	}
-	body, err := io.ReadAll(resp.Body)
+	body, _ := io.ReadAll(resp.Body)
 	err = json.Unmarshal(body, &getCurrentTrackOutput)
 	if err != nil {
 		return returnString, err

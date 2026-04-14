@@ -38,7 +38,7 @@ func (client *Client) Run() error {
 	if err := client.dg.Open(); err != nil {
 		return err
 	}
-	defer client.dg.Close()
+	defer func() { _ = client.dg.Close() }()
 
 	// Wait for CTRL+C
 	stop := make(chan os.Signal, 1)

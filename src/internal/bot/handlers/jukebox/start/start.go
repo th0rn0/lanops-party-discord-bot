@@ -20,6 +20,6 @@ func Handler(s *discordgo.Session, m *discordgo.MessageCreate, commandParts []st
 		} else {
 			returnString = "Starting Jukebox"
 		}
-		s.ChannelMessageSend(m.ChannelID, returnString)
+		_, _ = s.ChannelMessageSend(m.ChannelID, returnString)
 	}
 }
