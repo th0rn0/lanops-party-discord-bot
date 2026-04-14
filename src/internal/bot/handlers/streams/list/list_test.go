@@ -70,7 +70,7 @@ func TestHandler_Admin_Success(t *testing.T) {
 	}
 	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(200)
-		json.NewEncoder(w).Encode(streams)
+		_ = json.NewEncoder(w).Encode(streams)
 	}))
 	defer srv.Close()
 
@@ -84,7 +84,7 @@ func TestHandler_Admin_Success(t *testing.T) {
 func TestHandler_Admin_EmptyList(t *testing.T) {
 	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(200)
-		w.Write([]byte("[]"))
+		_, _ = w.Write([]byte("[]"))
 	}))
 	defer srv.Close()
 

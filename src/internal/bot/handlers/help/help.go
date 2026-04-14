@@ -24,7 +24,7 @@ func Handler(s *discordgo.Session, m *discordgo.MessageCreate, commandParts []st
 			cfg.Discord.CommandPrefix + "jukebox current":                       "Show the current track",
 			cfg.Discord.CommandPrefix + "jukebox volume <volume between 0-100>": "Set Jukebox Volume",
 		})
-		s.ChannelMessageSend(m.ChannelID, helpMsg)
+		_, _ = s.ChannelMessageSend(m.ChannelID, helpMsg)
 	}
 }
 

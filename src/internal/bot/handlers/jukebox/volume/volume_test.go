@@ -68,7 +68,7 @@ func TestHandler_Admin_NoArgs_Success(t *testing.T) {
 	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		if r.Method == "GET" {
 			w.WriteHeader(200)
-			json.NewEncoder(w).Encode(map[string]int{"volume": 42})
+			_ = json.NewEncoder(w).Encode(map[string]int{"volume": 42})
 			return
 		}
 		w.WriteHeader(200)

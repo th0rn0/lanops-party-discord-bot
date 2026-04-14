@@ -58,7 +58,7 @@ func TestHandler_Success(t *testing.T) {
 	_ = track
 	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(200)
-		json.NewEncoder(w).Encode(map[string]string{"name": "Sandstorm", "artist": "Darude"})
+		_ = json.NewEncoder(w).Encode(map[string]string{"name": "Sandstorm", "artist": "Darude"})
 	}))
 	defer srv.Close()
 

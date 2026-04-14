@@ -17,5 +17,5 @@ func Handler(s *discordgo.Session, m *discordgo.MessageCreate, commandParts []st
 		msgCh <- channels.MsgCh{Err: err, Message: "Something went wrong", Level: "ERROR"}
 		returnString = "There was a error connecting to the API"
 	}
-	s.ChannelMessageSend(m.ChannelID, returnString)
+	_, _ = s.ChannelMessageSend(m.ChannelID, returnString)
 }

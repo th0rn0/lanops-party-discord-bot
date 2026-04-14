@@ -67,7 +67,7 @@ func TestHandler_NotAdmin(t *testing.T) {
 func TestHandler_Admin_Enable_Success(t *testing.T) {
 	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(200)
-		json.NewEncoder(w).Encode(map[string]interface{}{"name": "mystream", "enabled": true})
+		_ = json.NewEncoder(w).Encode(map[string]interface{}{"name": "mystream", "enabled": true})
 	}))
 	defer srv.Close()
 
@@ -81,7 +81,7 @@ func TestHandler_Admin_Enable_Success(t *testing.T) {
 func TestHandler_Admin_Disable_Success(t *testing.T) {
 	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(200)
-		json.NewEncoder(w).Encode(map[string]interface{}{"name": "mystream", "enabled": false})
+		_ = json.NewEncoder(w).Encode(map[string]interface{}{"name": "mystream", "enabled": false})
 	}))
 	defer srv.Close()
 
